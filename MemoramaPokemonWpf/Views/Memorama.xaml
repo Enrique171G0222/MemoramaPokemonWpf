@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="MemoramaPokemonWpf.Views.Memorama"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:MemoramaPokemonWpf.Views"
+             xmlns:vm="clr-namespace:MemoramaPokemonWpf.ViewModels"
+             xmlns:views="clr-namespace:MemoramaPokemonWpf.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="750" d:DesignWidth="800">
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="ListBox">
+                <Setter Property="IsEnabled" Value="{Binding PuedeJugar}"></Setter>
+            </Style>
+        </Grid.Resources>
+        <ListBox x:Name="lstTabla" ItemsSource="{Binding ListaCartaPokemon}" SelectedItem="{Binding Seleccionado}" Padding="10" 
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Image VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="120">
+                        <Image.Style>
+                            <Style TargetType="Image">
+                                <Setter Property="Source" Value="/Images/pokeball.png"></Setter>
+
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Seleccionado}" Value="true">
+                                        <Setter Property="Source" Value="{Binding ImagenP}"></Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Rows="4" Columns="3" Margin="10"></UniformGrid>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+    </Grid>
+</UserControl>
